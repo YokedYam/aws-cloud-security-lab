@@ -1,0 +1,7 @@
+attachments/
+.DS_Store
+*.pyc
+__pycache__/
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
