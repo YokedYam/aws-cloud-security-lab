@@ -160,13 +160,13 @@ This entire lab is designed to stay in the AWS Free Tier:
 
 ## What I learned
 
-I built this lab alongside the AWS Cloud Practitioner Essentials course to get hands-on experience with the services I was reading about. The course gives you the vocabulary; this lab made it real.
+I built this lab alongside the AWS Cloud Practitioner Essentials course to really get a grasp of the AWS toolkit and how everything connects. The course gives you the vocabulary but this lab made it real.
 
-- **The services are more interconnected than they look on paper.** CloudTrail feeds GuardDuty, GuardDuty publishes to EventBridge, EventBridge triggers Lambda — once it's running it feels like a single system, not eight separate ones. That "aha" moment of watching a public S3 bucket get automatically re-privated in under 500ms made the whole architecture click.
-- **IAM is the hardest part to get right.** Wiring up the Lambda execution role taught me the difference between a trust policy (who can *assume* the role) and a permissions policy (what the role can *do*). Getting that wrong silently breaks everything downstream, and the error messages don't always point you to the right place.
-- **EventBridge patterns are more powerful than I expected.** Filtering GuardDuty findings by severity using a numeric condition in JSON — rather than writing any application code — was a good lesson in how much heavy lifting AWS managed services can absorb.
-- **Detection without response is just a louder inbox.** The formatter Lambda was the piece that made alerts actually actionable — structured subject line, severity label, console URL. Raw JSON landing in email at 3am helps no one.
-- **Cloud security is largely an architecture problem.** The controls here aren't complex code — they're the right services wired together in the right order. That's a pattern I expect to keep applying as I go deeper into this space.
+- **The services work together way more seamlessly than I expected.** CloudTrail feeds GuardDuty, GuardDuty publishes to EventBridge, EventBridge triggers Lambda, and once it's running it honestly feels like one system rather than eight separate ones. Watching a public S3 bucket get automatically re-privated in under 500ms was the moment the whole architecture clicked for me.
+- **IAM is harder than it looks.** Wiring up the Lambda execution role taught me the difference between a trust policy (who can assume the role) and a permissions policy (what the role can do). Getting that wrong breaks everything downstream and the error messages are not always helpful about where the problem actually is.
+- **EventBridge patterns are really customizable.** Filtering GuardDuty findings by severity using a JSON numeric condition, with no application code at all, was a good lesson in how much you can do just by configuring AWS services the right way.
+- **Detection without a response is just a louder inbox.** The formatter Lambda was the part that made alerts actually useful, a readable subject line, severity label, and a direct console URL. Raw JSON hitting your email at 3am does not help anyone.
+- **Cloud security is really an architecture problem more than a coding one.** The controls here are not complex code, they are the right services connected in the right order. That is a pattern I plan to keep building on as I get deeper into this space.
 
 ---
 
