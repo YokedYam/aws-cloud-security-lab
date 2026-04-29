@@ -158,12 +158,15 @@ This entire lab is designed to stay in the AWS Free Tier:
 
 ---
 
-## What I learned (placeholder — fill after build)
+## What I learned
 
-> _After completing the lab, replace this section with 3–5 bullets about what you learned, what surprised you, and what you'd do differently. This is the section recruiters read._
+I built this lab alongside the AWS Cloud Practitioner Essentials course to get hands-on experience with the services I was reading about. The course gives you the vocabulary; this lab made it real.
 
-- _e.g. "Realized that EventBridge patterns are JSON, not regex, and that 'detail' filtering uses prefix/suffix/anything-but operators."_
-- _e.g. "Spent 2 hours debugging a Lambda IAM role before I learned about the trust relationship vs. the permissions policy."_
+- **The services are more interconnected than they look on paper.** CloudTrail feeds GuardDuty, GuardDuty publishes to EventBridge, EventBridge triggers Lambda — once it's running it feels like a single system, not eight separate ones. That "aha" moment of watching a public S3 bucket get automatically re-privated in under 500ms made the whole architecture click.
+- **IAM is the hardest part to get right.** Wiring up the Lambda execution role taught me the difference between a trust policy (who can *assume* the role) and a permissions policy (what the role can *do*). Getting that wrong silently breaks everything downstream, and the error messages don't always point you to the right place.
+- **EventBridge patterns are more powerful than I expected.** Filtering GuardDuty findings by severity using a numeric condition in JSON — rather than writing any application code — was a good lesson in how much heavy lifting AWS managed services can absorb.
+- **Detection without response is just a louder inbox.** The formatter Lambda was the piece that made alerts actually actionable — structured subject line, severity label, console URL. Raw JSON landing in email at 3am helps no one.
+- **Cloud security is largely an architecture problem.** The controls here aren't complex code — they're the right services wired together in the right order. That's a pattern I expect to keep applying as I go deeper into this space.
 
 ---
 
